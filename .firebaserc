@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "turksaapp": {
+      "hosting": {
+        "turksa-app": [
+          "turksaapp"
+        ]
+      }
+    }
+  }
+}

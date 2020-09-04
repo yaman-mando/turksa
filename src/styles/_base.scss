@@ -1,0 +1,259 @@
+﻿@import "colors";
+@import "mixin";
+@import "variables";
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+// Basics tags
+
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.text-nowrap{
+  white-space: nowrap
+}
+.overflow-hidden{
+  overflow:hidden;
+}
+
+//position
+.relative {
+  position: relative;
+}
+
+//
+.w-100 {
+  width: 100%;
+}
+
+// Horizontal Line
+hr {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 3rem 0;
+}
+
+
+//Round Circle
+.round-corner {
+  border-radius: 100%;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.shop-card-wrapper .mat-card {
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+@media(max-width:959px) {
+
+}
+
+@media(max-width:420px) {
+
+}
+
+
+.h-100{
+  height: 100%;
+}
+.over-visible{
+  overflow: visible !important;
+}
+.d-inline{
+  display: inline !important;
+}
+.d-block{
+  display: block !important;
+}
+.text-ellipse{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+//buttons
+.simple-btn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-content: center;
+  align-items: center;
+}
+
+.button-lg {
+  min-width: 160px !important;
+  min-height: 50px;
+}
+
+.transparent-btn {
+  border: 2px solid #d8d8d8;
+  display: block;
+  padding: 0.8rem;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 2.5rem 0;
+  color: rgba(0, 0, 0, 0.54);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+//fonts styles
+
+._f{
+  &_headline {
+    @include font-style($headline-font-size ,bold);
+  }
+  &_title{
+    @include font-style($title-font-size, bold);
+  }
+  &_header{
+    @include font-style($header-font-size,regular);
+  }
+  &_larg_body{
+    @include font-style($largeBody-font-size,regular);
+  }
+  &_secondary_body{
+    @include font-style($secondBody-font-size,regular);
+  }
+  &_bold_body{
+    @include font-style($body-font-size,bold);
+  }
+  &_body{
+    @include font-style($body-font-size,regular);
+  }
+  &_placeholder{
+    @include font-style($placeHolder-font-size,regular);
+  }
+  &_regular{
+    @include font-style($regular-font-size,regular);
+  }
+}
+
+//colors
+._c{
+  &_light_gray{color:$app-light-gray !important;}
+  &_light_red{color:$app-light-red !important;}
+  &_red{color:$app-red !important;}
+  &_dark_red{color:$app-dark-red !important;}
+  &_dark_gray{color:$app-dark-gray !important;}
+  &_white{color:$app-white !important;}
+  &_black{color:$app-black !important;}
+}
+
+//backgrounds
+._bg{
+  &_light_gray{background:$app-light-gray !important;}
+  &_light_red{background:$app-light-red !important;}
+  &_red{background:$app-red!important;}
+  &_dark_red{background:$app-dark-red!important;}
+  &_dark_gray{background:$app-dark-gray!important;}
+  &_white{background:$app-white!important;}
+  &_black{background:$app-black!important;}
+}
+
+
+//inputs
+._input_style{
+  &_1 {
+    border: 0.5px solid $app-dark-gray;
+    border-radius: 12px;
+    opacity: 0.8;
+    width: 315px;
+    height: 40px;
+    padding: 0 10px;
+    box-shadow: unset !important;
+    input,
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:active,
+    input:-webkit-autofill:focus {
+      padding: 0;
+      background-color: #FFFFFF !important;
+      color: #555 !important;
+      border: unset !important;
+      box-shadow: 0 0 0 1000px white inset !important;
+      -webkit-box-shadow: 0 0 0 1000px white inset !important;
+      -webkit-text-fill-color: #555555 !important;
+    }
+    .passIcon{
+      position: absolute;
+      outline: unset !important;
+      &:lang(en){
+        right: 10px;
+      }
+      &:lang(ar){
+        left: 10px;
+      }
+    }
+  }
+}
+
+._button_style{
+  &_1{
+    border-radius: 12px !important;
+    width: 185px !important;
+    height: 40px!important;
+    min-height: 30px !important;
+    text-transform: uppercase!important;
+    font-size: 15px!important;
+    outline: unset !important;
+  }
+  &_square{
+    border-radius: 12px !important;
+    width: 120px !important;
+    min-width: 120px !important;
+    height: 97px!important;
+    min-height: 75px !important;
+    text-transform: uppercase!important;
+    font-size: 15px!important;
+    outline: unset !important;
+    span.mat-button-wrapper{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      mat-icon{flex: .5}
+    }
+  }
+}
+
+.ng-valid{
+  ._c_button{
+    &_light_gray{color:$app-light-gray}
+    &_light_red{color:$app-light-red !important;}
+    &_red{color:$app-red}
+    &_dark_red{color:$app-dark-red}
+    &_dark_gray{color:$app-dark-gray}
+    &_white{color:$app-white}
+    &_black{color:$app-black}
+  }
+  ._bg_button{
+    &_light_gray{background:$app-light-gray !important;}
+    &_light_red{background:$app-light-red !important;}
+    &_red{background:$app-red!important;}
+    &_dark_red{background:$app-dark-red!important;}
+    &_dark_gray{background:$app-dark-gray!important;}
+    &_white{background:$app-white!important;}
+    &_black{background:$app-black!important;}
+  }
+}
+
+
+._icon{
+  &_button{width: 47px !important;height: 28px!important;}
+}
+
+
+
+
+
+
+

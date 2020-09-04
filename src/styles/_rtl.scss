@@ -1,0 +1,40 @@
+﻿html[dir="rtl"]{
+
+  /*slider home*/
+  slideShow .slider-content-v3 .slider-buttons{left: 0;right: unset}
+
+  /*sideNav website*/
+  sidenav-items{
+  .mat-list-item {
+    mat-icon {
+      font-size: 7vw !important;
+      text-align: end !important;
+    }
+  }
+  }
+
+  /*signIn page*/
+  app-login{
+    .sign-in-image{transform: rotate(180deg)}
+  }
+
+  /*admin sidebar*/
+  adminSideBar{
+    .mat-list-item {
+      mat-icon {
+        text-align: end !important;
+      }
+    }
+  }
+
+  /*admin panel page*/
+  app-admin-panel{
+    .add-big-button {
+      button {
+        right: unset !important;
+        left: 50px;
+      }
+    }
+  }
+
+}

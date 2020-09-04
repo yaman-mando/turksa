@@ -1,0 +1,37 @@
+<form [formGroup]="loginForm">
+
+  <!--userName input-->
+  <div class="form-group row">
+    <label for="staticEmail" class="col-sm-4 _f_bold_body col-form-label text-capitalize">{{_tb.translate.FORMS.FIELDS.EMAIL_PHONE}}</label>
+    <div class="col-sm-8 _input_style_1">
+      <input formControlName="UserName" type="text" class="form-control" id="staticEmail">
+    </div>
+  </div>
+
+  <!--password input-->
+  <div class="form-group row">
+    <label for="inputPassword" class="col-sm-4 _f_bold_body col-form-label text-capitalize">{{_tb.translate.FORMS.FIELDS.PASSWORD}}</label>
+    <div class="col-sm-8 d-flex align-items-center _input_style_1">
+      <input formControlName="Password" [type]="hide ? 'password' : 'text'" class="form-control" id="inputPassword">
+      <button class="passIcon" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon class="_c_dark_red">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="_text-end">
+  <a href="javascript:;" style="text-decoration: underline" class="text-capitalize _c_dark_gray _f_body">{{_tb.translate.FORMS.FIELDS.FORGOT_PASSWORD}}</a>
+  </div>
+
+  <!--submit button-->
+  <div class="text-center py-5">
+  <button [disabled]="loginForm.invalid"
+          (click)="OnSubmit()"
+          class="button-lg mb-3 _c_button_white _bg_button_light_red _button_style_1"
+          mat-raised-button
+  >
+    {{_tb.translate.pages.login.login}}
+  </button>
+  </div>
+
+</form>

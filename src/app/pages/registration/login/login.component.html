@@ -1,0 +1,80 @@
+<div class="row m-0 d-flex align-content-center">
+
+  <!--picture and logo-->
+  <div  class="background-part d-flex min-vh-100 p-0 overflow-hidden"
+        [ngClass]="_help.screenWidth<769? 'col-12':'col-6'"
+  >
+    <div class="transbox">
+      <div class="logo">
+        <img src="/assets/svg/white-logo.svg" alt="logo"
+             [ngClass]="_help.screenWidth<480? 'w-50':''"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!--form buttons-->
+  <div class="form-container d-flex flex-column"
+       [ngClass]="_help.screenWidth<769? 'mobile-form-style':'col-6'"
+  >
+
+    <p class="_f_title text-center part1">{{_tb.translate.pages.login.title}}</p>
+
+    <div class="d-flex flex-column align-items-center justify-content-center part2">
+    <!--login form-->
+    <ng-container *ngIf="isSignin">
+    <login-form></login-form>
+    </ng-container>
+
+    <!--login toggle button-->
+    <button [hidden]="isSignin" (click)="isSignin = true" class="button-lg mb-3 _c_white _bg_light_red _button_style_1"
+            mat-raised-button
+    >
+      {{_tb.translate.pages.login.login}}
+    </button>
+
+    <!--no account-->
+      <div class="text-capitalize d-flex align-items-center w-100 justify-content-center">
+        <hr class="_bg_dark_gray" style="flex:.4">
+        <span class="px-3 _f_secondary_body _c_dark_gray">{{_tb.translate.FORMS.FIELDS.NO_ACCOUNT.NO}}</span>
+        <hr class="_bg_dark_gray" style="flex:.4">
+      </div>
+
+
+    <!--sign up-->
+    <div class="py-3">
+      <button (click)="isSignin = false"
+              [ngClass]="{'_c_dark_gray _bg_white': !isSignin ,
+               '_c_white _bg_dark_red':isSignin,
+               'signUp-btn':!isSignin && _help.screenWidth<769
+               }"
+              class="button-lg mb-3 _button_style_1"
+              mat-stroked-button
+      >
+        {{_tb.translate.FORMS.FIELDS.SIGN_UP}}
+      </button>
+    </div>
+
+    <!--signup part-->
+    <ng-container *ngIf="!isSignin">
+    <p class="_f_bold_body">{{_tb.translate.pages.login.choose_type}}</p>
+
+    <!--type buttons-->
+    <div class="type_buttons d-flex w-100">
+
+      <button [routerLink]="['/stepper']" class="button-lg  mb-3 _bg_dark_gray _button_style_square"
+              mat-raised-button>
+        <mat-icon class="_icon_button" svgIcon="company-plus"></mat-icon>
+        <span class="_f_secondary_body _c_white text-capitalize">{{_tb.translate.pages.login.company}}</span>
+      </button>
+      <button class="button-lg  mb-3 _bg_light_red _button_style_square"
+              mat-raised-button>
+        <mat-icon class="_icon_button" svgIcon="user-plus"></mat-icon>
+        <span class="_f_secondary_body _c_white text-capitalize">{{_tb.translate.pages.login.labels.self_employed}}</span>
+      </button>
+    </div>
+    </ng-container>
+    </div>
+
+  </div>
+</div>

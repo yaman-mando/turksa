@@ -1,0 +1,54 @@
+@import "src/styles/colors";
+
+.background-part{
+  background-image:url("/assets/images/login/background-half.png");
+  background-size: cover;
+  background-position: center top;
+}
+
+.transbox {
+  clip-path: polygon(0 0, 25% 0, 100% 100%, 0% 100%);
+  //background:$app-red;
+  background:#8F0C06;
+  opacity: 0.8;
+  width: 100%;
+  .logo{
+    position: absolute;
+    bottom: 50px;
+    transform: translate(25%,0);
+  }
+}
+
+.form-container{
+  padding: 0 10%;
+  .part1{
+    flex: .25;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .part2{flex: .75}
+}
+
+.type_buttons{
+  justify-content: space-evenly;
+}
+
+.mobile-form-style{
+  position: absolute;
+  background: #ffffffa8;
+  box-shadow: 0 10px 30px #D0132114;
+  height: 70vh;
+  width: 90vw;
+  right: 5vw;
+  left: 5vw;
+  top: 7vh;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+}
+
+.signUp-btn{
+  background: transparent !important;
+  border-color: $app-dark-red !important;
+}
