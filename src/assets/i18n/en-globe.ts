@@ -72,7 +72,10 @@ export const EN_GLOBE_DATA = {
       EXIT_MSG: "Do You Want To Exit From App?",
       EXIT_HEAD: "Confirmed Message",
       check_email_password: "please check your email and password.",
-      check_email:'please check your email.'
+      check_email:'please check your email.',
+      password_match_msg:'password must be contain at least 1 digit,1 lowercase letter,1 uppercase letter and 8 to 30 chars',
+      INVALID_URL:'the value must be like {https://example.example}',
+      SUCCESS_MSG:'The operation completed successfully'
     },
     FIELDS: {
       SUBMIT: "submit",
@@ -91,6 +94,7 @@ export const EN_GLOBE_DATA = {
       CITY: "city",
       ADDRESS: "address",
       EMAIL: "E-mail",
+      WORK_EMAIL:'Work E-mail',
       EMAIL_PHONE:'E-mail/phone',
       PASSWORD: "password",
       OLD_PASSWORD: "Old Password",
@@ -123,6 +127,7 @@ export const EN_GLOBE_DATA = {
     login: {
       steps:{
         mobile:'Mobile',
+        verify:'Verify',
         login_details:'Login Details',
         personal:'Personal & Work Info'
       },

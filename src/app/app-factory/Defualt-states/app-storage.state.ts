@@ -4,6 +4,7 @@ import {AppStorageInterface} from "../app-factory.interface";
 export const AppStorageKey = {
   isLoggedIn: "isLoggedIn",
   token: "token",
+  refreshToken:"refreshToken"
   //role: 'role',
   //isVendor: 'isVendor',
   //isCustomer: 'isCustomer',
@@ -19,6 +20,7 @@ export const AppStorageKey = {
 export const AppStorageInitialState: AppStorageInterface = {
   isLoggedIn: false,
   token: '',
+  refreshToken:''
   //role: null,
  //isCustomer: false,
   //isVendor: false,

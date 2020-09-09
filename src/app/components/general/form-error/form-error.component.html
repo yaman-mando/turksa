@@ -1,14 +1,33 @@
 <ng-container *ngIf="_tb.translate.FORMS as _tbForm">
     <ng-container *ngIf="control.errors as errors">
         <ng-container *ngIf="control.touched">
-            <p>
+            <p style="margin:0">
+
                 <!--required-->
                 <ng-container *ngIf="errors?.required">{{_tbForm.MSG.IS_REQUIRED_FIELD}}</ng-container>
                 <!--end required-->
+
                 <!--email-->
                 <ng-container *ngIf="errors?.email">{{_tbForm.MSG.EMAIL_PATTERN_ERROR}}</ng-container>
                 <!--end email-->
+
             </p>
         </ng-container>
     </ng-container>
+
+<ng-container *ngIf="!control.errors?.required">
+  <ng-container *ngIf="control.invalid as invalid">
+    <ng-container *ngIf="control.touched">
+      <p style="margin:0">
+
+        <!--invalid-->
+        <ng-container *ngIf="invalid">{{validMsg?validMsg:_tbForm.MSG.INVALID_DATA}}</ng-container>
+        <!--end invalid-->
+
+      </p>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+
 </ng-container>

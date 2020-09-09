@@ -15,7 +15,7 @@ export class BaseService {
 
   public getProp_PromiseType_GetType<ObjectType, PropType>
   (_obj: PO_GetPropPromiseType<PropType>, _callBack: SubscriptionHook)
-    : Promise<{ data: PropType, resCode: number }> {
+    : Promise<{ data: any,status:boolean, errors:[] }> {
     return new Promise(async (resolve, reject) => {
       if (_callBack && _callBack._onStart) {
         await _callBack._onStart();
@@ -26,9 +26,10 @@ export class BaseService {
       }).subscribe(async (res: ObjectType) => {
         if (res[RES_CODE_PROP] === RES_CODE.Success) {
           if (_obj._updateBehavior) {
-            _obj._beh.next(res[_obj._propName]);
+            _obj._beh.next(res[DATA_CODE_PROP]);
+            console.log(res[DATA_CODE_PROP]);
           }
-          resolve({data: res[_obj._propName], resCode: res[RES_CODE_PROP]});
+          resolve({data: res[DATA_CODE_PROP], status: res[RES_CODE_PROP],errors:res[ERROR_CODE_PROP]});
         }
         //if no res
         if (!res || !res[RES_CODE_PROP]) {
@@ -42,7 +43,7 @@ export class BaseService {
           if (_obj._updateBehavior) {
             _obj._beh.next(null);
           }
-          resolve({data: res[_obj._propName], resCode: res[RES_CODE_PROP]});
+          resolve({data: res[DATA_CODE_PROP], status: res[RES_CODE_PROP],errors:res[ERROR_CODE_PROP]});
         }
       }, async (e) => {
 
@@ -188,7 +189,7 @@ export class BaseService {
   }
 
   /*send promise type*/
-  public send_PromiseType<ResType>(_obj: PO_PostPromiseType, _callBack: SubscriptionHook): Promise<{ response: ResType; state: "success" | "failed" }> {
+  public send_PromiseType<ResType>(_obj: PO_PostPromiseType, _callBack: SubscriptionHook): Promise<{ data:any; status: boolean;errors:[]}> {
     console.log(_obj);
     return new Promise(async (resolve, reject) => {
       console.log(_callBack);
@@ -201,14 +202,15 @@ export class BaseService {
       }).subscribe(async (res: ResType) => {
         console.log(res);
         if (res[RES_CODE_PROP] === RES_CODE.Success) {
-          resolve({response: res, state: "success"});
-        } else if (!res || !res[RES_CODE_PROP]) {
+          resolve({data: res[DATA_CODE_PROP], status:res[RES_CODE_PROP],errors:res[ERROR_CODE_PROP]});
+        }
+        else if (!res || !res[RES_CODE_PROP]) {
           if (_callBack && _callBack._onError) {
             await _callBack._onError();
           }
-          reject(new Error(`${_obj._rejectMsg}`));
+          resolve({data: res[DATA_CODE_PROP], status: res[RES_CODE_PROP],errors:res[ERROR_CODE_PROP]},);
         } else {
-          resolve({response: res, state: "success"});
+          resolve({data: res[DATA_CODE_PROP], status: res[RES_CODE_PROP],errors:res[ERROR_CODE_PROP]});
         }
       }, async (e) => {
         if (_callBack && _callBack._onError) {
@@ -296,7 +298,9 @@ export class BaseService {
 }//end of service
 
 //res name + status code number
+export const DATA_CODE_PROP: string = 'data';
 export const RES_CODE_PROP: string = 'status';
+export const ERROR_CODE_PROP:string='errors';
 export const RES_CODE = {
   Failed: false,
   Success: true,
@@ -318,6 +322,7 @@ export interface PO_GetPropPromiseType<T> {
   _beh: BehaviorSubject<T>;
   _updateBehavior: boolean;
   _propName: string;
+  _data?:string,
   _rejectMsg: string;
   _params?: {};
   _headers?;

@@ -13,6 +13,7 @@ export const Api_Auth = {
 
 //Company Api
 export const Api_SP = {
+  business_type:'api/v1/Client/LoadCompanyRegistrationPage',
   CompleteCompanyRegistration: 'api/v1/Client/CompleteSpRegistraitonAsCompany',
 };
 

@@ -1,6 +1,7 @@
 ﻿export interface AppStorageInterface {
   isLoggedIn: boolean;
   token: string;
+  refreshToken:string
   //role: "Vendor" | "CustomerUser";
   //isVendor: boolean;
   //isCustomer: boolean;

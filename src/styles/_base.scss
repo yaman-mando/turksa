@@ -161,6 +161,7 @@ hr {
 }
 
 
+
 //inputs
 ._input_style{
   &_1 {
@@ -171,11 +172,13 @@ hr {
     height: 40px;
     padding: 0 10px;
     box-shadow: unset !important;
+    @media (min-width: 769px){
     input,
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:active,
-    input:-webkit-autofill:focus {
+    input:-webkit-autofill:focus
+    {
       padding: 0;
       background-color: #FFFFFF !important;
       color: #555 !important;
@@ -183,6 +186,22 @@ hr {
       box-shadow: 0 0 0 1000px white inset !important;
       -webkit-box-shadow: 0 0 0 1000px white inset !important;
       -webkit-text-fill-color: #555555 !important;
+    }
+    }
+    @media (max-width: 768px) {
+      input,
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:active,
+      input:-webkit-autofill:focus {
+        padding: 0;
+        background-color: transparent !important;
+        color: #555 !important;
+        border: unset !important;
+        box-shadow: 0 0 0 1000px transparent inset !important;
+        -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+        -webkit-text-fill-color: #000 !important;
+      }
     }
     .passIcon{
       position: absolute;
@@ -193,6 +212,144 @@ hr {
       &:lang(ar){
         left: 10px;
       }
+    }
+  }
+}
+
+._select_style{
+  &_1 {
+    border: 0.5px solid $app-dark-gray;
+    border-radius: 12px;
+    opacity: 0.8;
+    width: 315px;
+    height: 40px;
+    padding: 0 10px;
+    box-shadow: unset !important;
+    @media (min-width: 769px){
+      select,
+      select:-webkit-autofill,
+      select:-webkit-autofill:hover,
+      select:-webkit-autofill:active,
+      select:-webkit-autofill:focus
+      {
+        padding: 0;
+        background-color: #FFFFFF !important;
+        color: #555 !important;
+        border: unset !important;
+        box-shadow: 0 0 0 1000px white inset !important;
+        -webkit-box-shadow: 0 0 0 1000px white inset !important;
+        -webkit-text-fill-color: #555555 !important;
+      }
+    }
+    @media (max-width: 768px) {
+      select,
+      select:-webkit-autofill,
+      select:-webkit-autofill:hover,
+      select:-webkit-autofill:active,
+      select:-webkit-autofill:focus {
+        padding: 0;
+        background-color: transparent !important;
+        color: #555 !important;
+        border: unset !important;
+        box-shadow: 0 0 0 1000px transparent inset !important;
+        -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+        -webkit-text-fill-color: #000 !important;
+      }
+    }
+    .passIcon{
+      position: absolute;
+      outline: unset !important;
+      &:lang(en){
+        right: 10px;
+      }
+      &:lang(ar){
+        left: 10px;
+      }
+    }
+  }
+
+  &_2{
+    border: 0.5px solid $app-dark-gray;
+    border-radius: 12px;
+    opacity: 0.8;
+    width: 315px;
+    height: 40px;
+    padding: 0 10px;
+    box-shadow: unset !important;
+    mat-form-field
+    { width: 100%;
+      background-color: white;
+      height: 38px;
+    }
+
+    .mat-form-field-wrapper{
+      height: 38px;
+    }
+
+    .mat-icon-button{
+      outline: none;
+    }
+
+    .mat-form-field-flex
+    {padding:0;display: flex;align-items: center}
+
+    .mat-form-field-underline
+    {display: none !important;}
+
+    .mat-form-field-appearance-fill .mat-form-field-infix
+    {padding:0 !important;
+      display: flex;
+      align-items: center;
+      mat-icon{color: $app-light-red}
+    }
+
+    .mat-form-field-appearance-fill .mat-form-field-flex
+    {background-color: transparent !important;
+      padding: 0 !important;
+    }
+
+    mat-form-field{ width: 100%;
+      background-color: white;
+      height: 38px;
+    }
+    .mat-select-arrow{
+      display: none;
+    }
+
+    .mat-form-field-wrapper{
+      height: 38px;
+    }
+
+    .mat-form-field-flex{
+      padding:0
+    }
+
+    .mat-select-value{
+      overflow: visible !important;
+    }
+
+    .mat-form-field-appearance-fill .mat-form-field-infix{padding:0 !important;}
+
+    .mat-select-trigger
+    {display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 38px;
+    }
+
+    .mat-form-field-infix
+    {border:unset}
+
+  }
+}
+
+._radio_style{
+  &_1{
+    .mat-radio-outer-circle{
+      border-color: $app-light-red !important;
+    }
+    .mat-radio-inner-circle{
+      background-color: $app-dark-red !important;
     }
   }
 }
@@ -251,6 +408,32 @@ hr {
   &_button{width: 47px !important;height: 28px!important;}
 }
 
+
+//snacks styles
+.error-snack {
+  background: $app-light-red!important;
+
+  span {
+    color: white;
+    font-weight: 600;
+  }
+
+}
+
+//mat snack bar
+simple-snack-bar {
+  font-weight: 600;
+}
+
+//snack style web site
+.snackbar-wrapper {
+  color: white !important;
+  background: #28A745 !important;
+
+  button {
+    color: white !important;
+  }
+}
 
 
 

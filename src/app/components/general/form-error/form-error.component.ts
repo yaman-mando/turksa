@@ -15,6 +15,9 @@ export class FormErrorComponent implements OnInit, OnDestroy {
     @Input('control')
     public control : AbstractControl;
 
+    @Input('validMsg')
+    public validMsg:string;
+
     constructor(
         public _tb : TranslateBaseService
     ) {

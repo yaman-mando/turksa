@@ -13,6 +13,10 @@ import {HttpClientModule} from "@angular/common/http";
 import {RegisterationHeaderComponent} from "../../../components/registration/registeration-header/registeration-header.component";
 import {CodeInputModule} from "angular-code-input";
 import {FormErrorModule} from "../../../components/general/form-error/form-error.module";
+import {BaseUxService} from "../../../services/base-ux.service";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatSelectModule} from "@angular/material/select";
 
 const routes: Routes = [
   {
@@ -23,22 +27,25 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        CodeInputModule,
-        ReactiveFormsModule,
-        RouterModule.forChild(routes),
-        MatStepperModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatIconModule,
-        HttpClientModule,
-        FormErrorModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CodeInputModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
+    MatStepperModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    HttpClientModule,
+    FormErrorModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatSelectModule
+  ],
   declarations: [SignupStepperComponent,RegisterationHeaderComponent],
-  providers:[MatIconRegistry]
+  providers:[MatIconRegistry,BaseUxService]
 
 })
 

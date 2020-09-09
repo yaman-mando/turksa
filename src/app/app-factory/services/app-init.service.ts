@@ -58,6 +58,7 @@ export class AppInitService {
     await this._appStorageService.initStorage({
       token: await this._storage.get(AppStorageKey.token),
       isLoggedIn: await this._storage.get(AppStorageKey.isLoggedIn),
+      refreshToken:await this._storage.get(AppStorageKey.refreshToken)
     });
   }
 

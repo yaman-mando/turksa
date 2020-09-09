@@ -77,7 +77,11 @@ export const AR_GLOBE_DATA: typeof EN_GLOBE_DATA = {
       EXIT_MSG: "هل تريد الخروج من التطبيق ؟",
       EXIT_HEAD: "رسالة تأكيد",
       check_email_password: 'يرجى التحقق من البريد الالكتروني او كلمة المرور',
-      check_email:'يرجى التحقق من البريد الالكتروني'
+      check_email:'يرجى التحقق من البريد الالكتروني',
+      password_match_msg:'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل وحرف صغير واحد وحرف كبير واحد و 8 إلى 30 حرفًا',
+      INVALID_URL:'القيمة المدخلة يجب أن تكون كالنموذج {https://example.example}',
+      SUCCESS_MSG:'تم إكمال العملية بنجاح'
+
     },
     FIELDS: {
       SUBMIT: "تسجيل",
@@ -96,6 +100,7 @@ export const AR_GLOBE_DATA: typeof EN_GLOBE_DATA = {
       CITY: "المدينة",
       ADDRESS: "العنوان",
       EMAIL: "البريد الالكتروني",
+      WORK_EMAIL:'البريد الالكتروني للشركة',
       EMAIL_PHONE:'البريد الالكتروني/الهاتف',
       PASSWORD: "كلمة المرور",
       CONFIRM_PASSWORD: "تأكيد كلمة المرور",
@@ -129,6 +134,7 @@ export const AR_GLOBE_DATA: typeof EN_GLOBE_DATA = {
     login: {
       steps:{
         mobile:'جوال',
+        verify:'التحقق',
         login_details:'معلومات التسجيل',
         personal:'المعلومات الشخصية والعمل'
       },
@@ -144,7 +150,7 @@ export const AR_GLOBE_DATA: typeof EN_GLOBE_DATA = {
       },
       msg:{
         completed_successfully:'تمت العملية بنجاح',
-        check_your_email:'we will review your application soon, enjoy building your profile please check your e-mail to verify it',
+        check_your_email:'سنراجع طلبك قريبًا ، استمتع ببناء ملفك الشخصي ، يرجى التحقق من بريدك الإلكتروني للتحقق منه'
       },
      title:'أهلا بكم في موقع توركسا',
       login:'تسجيل الدخول',

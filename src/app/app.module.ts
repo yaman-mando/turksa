@@ -12,7 +12,6 @@ import {TranslateBaseService} from "./app-translation/services/translation-base.
 import {TranslationLoaderService} from "./app-translation/services/translation-load.service";
 import {AppStorageService} from "./app-factory/services/app-storage.service";
 import {TranslateModule} from "@ngx-translate/core";
-import {HomeModule} from "./pages/home/home.module";
 import {MatButtonModule} from "@angular/material/button";
 import {AppInterceptor} from "./app-factory/Defualt-states/app.interceptor";
 import {MatIconModule, MatIconRegistry} from "@angular/material/icon";
@@ -23,6 +22,10 @@ import {BaseService} from "./services/base.service";
 import {$PROJECT_URL} from "./static-api/static-api";
 import {jwtOptionsFactory} from "./jwt-factory/jwt.factory";
 import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
+import {BaseUxService} from "./services/base-ux.service";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {Overlay} from "@angular/cdk/overlay";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -32,9 +35,9 @@ import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
     ToastrModule.forRoot(), // ToastrModule added
     TranslateModule.forRoot(),
     FormsModule,
-    HomeModule,
     AppRoutingModule,
     HttpClientModule,
+    MatNativeDateModule,
     JwtModule.forRoot({
       config: {
         whitelistedDomains: [$PROJECT_URL]
@@ -51,7 +54,7 @@ import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
     // Remove it when a real server is ready to receive requests.
     MatButtonModule,
     MatIconModule,
-    MatIconModule,
+    MatSnackBarModule,
     HttpClientModule
   ],
   providers: [
@@ -62,6 +65,9 @@ import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
     MatIconRegistry,
     HelpService,
     BaseService,
+    BaseUxService,
+    Overlay,
+    MatSnackBar,
     //app interceptor
     {
       provide: HTTP_INTERCEPTORS,

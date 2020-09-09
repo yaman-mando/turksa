@@ -1,7 +1,10 @@
 <registeration-header></registeration-header>
 
-<div class="container p-3 pt-5 d-flex justify-content-center">
-  <mat-horizontal-stepper [linear]="true" (selectionChange)="timerActive($event)" [selectedIndex]="activeStep" class="_height-100_vh text-center" labelPosition="bottom"
+<div class="container px-0 py-3 px-sm-3 pt-5 d-flex justify-content-center">
+  <mat-horizontal-stepper [disableRipple]="true" [linear]="false"
+                          (selectionChange)="timerActive($event)"
+                          [selectedIndex]="activeStep"
+                          class="_height-100_vh text-center" labelPosition="bottom"
                           #stepper>
 
     <!--step 1 Mobile Number-->
@@ -22,7 +25,7 @@
               <div class="col-8 _input_style_1">
                 <input placeholder="5xx xxx xx xx" formControlName="mobile" type="text" class="form-control"
                        id="mobile">
-                <app-form-error [control]="mobileFormGroup.get('mobile')"></app-form-error>
+                <app-form-error [validMsg]="_tb.translate.FORMS.MSG.INVALID_NUMBER" [control]="mobileFormGroup.get('mobile')"></app-form-error>
               </div>
             </div>
           </form>
@@ -30,7 +33,7 @@
 
         <!--next button-->
         <div class="col-12 button-col">
-          <button (click)="registerByPhoneNumber()" class="button-lg mb-3 _bg_light_red _c_white _button_style_1"
+          <button [disabled]="mobileFormGroup.invalid" (click)="registerByPhoneNumber()" class="button-lg mb-3 _bg_light_red _c_white _button_style_1"
                   mat-stroked-button>Next
           </button>
         </div>
@@ -39,21 +42,19 @@
 
     </mat-step>
 
-    <!--step 2 code and password-->
-    <mat-step [stepControl]="loginDetailsFormGroup" optional>
-      <ng-template matStepLabel>{{_tb.translate.pages.login.steps.login_details}}</ng-template>
+    <!--step 2 verify code-->
+    <mat-step [stepControl]="verifyFormGroup">
+      <ng-template matStepLabel>{{_tb.translate.pages.login.steps.verify}}</ng-template>
 
       <!--step contain-->
-
-      <!--code section-->
-      <div *ngIf="!isPassword" class="row code-row step-row justify-content-center">
+      <div class="row code-row step-row justify-content-center">
 
         <div class="col-12 d-flex flex-column align-items-center">
           <p
             class="_f_secondary_body font-weight-bold _c_dark_gray text-center">{{_tb.translate.pages.login.labels.please_enter_code}}</p>
           <p class="font-20 _c_light_red text-center">05xx xxx xx xx</p>
 
-          <form class="py-4" [formGroup]="loginDetailsFormGroup">
+          <form class="py-4" [formGroup]="verifyFormGroup">
             <div class="form-group row">
               <div class="d-flex justify-content-center position-relative align-items-center _input_style_1">
                 <code-input
@@ -95,8 +96,16 @@
 
       </div>
 
+    </mat-step>
+
+    <!--step 3 code and password-->
+    <mat-step [stepControl]="passwordFormGroup">
+      <ng-template matStepLabel>{{_tb.translate.pages.login.steps.login_details}}</ng-template>
+
+      <!--step contain-->
+
       <!--password section-->
-      <div *ngIf="isPassword" class="row code-row step-row justify-content-around">
+      <div  class="row code-row step-row justify-content-around">
         <div class="col-12 d-flex flex-column">
           <p class="text-capitalize _f_secondary_body font-weight-bold _c_dark_gray text-center">
             {{_tb.translate.pages.login.labels.set_your_password}}
@@ -110,21 +119,27 @@
                        class="col-4 col-sm-5 _text-start _f_bold_body col-form-label text-capitalize">
                   {{_tb.translate.FORMS.FIELDS.PASSWORD}}
                 </label>
-                <div class="col-8 col-sm-7 d-flex align-items-center _input_style_1">
+                <div class="col-8 col-sm-7 d-flex flex-wrap align-items-center _input_style_1">
                   <input formControlName="password" [type]="hide ? 'password' : 'text'" class="form-control">
                   <button class="passIcon" mat-icon-button matSuffix (click)="hide = !hide"
                           [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon class="_c_dark_red">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   </button>
                 </div>
+                <div class="col-4 col-sm-5"></div>
+                <app-form-error class="col-8 col-sm-7" [validMsg]="_tb.translate.FORMS.MSG.password_match_msg"
+                                [control]="passwordFormGroup.get('password')">
+                </app-form-error>
               </div>
 
               <!--confirm password-->
               <div class="form-group row d-flex align-items-center">
+
                 <label for="inputPassword"
                        class="col-4 col-sm-5 _text-start _f_bold_body col-form-label text-capitalize">
                   {{_tb.translate.FORMS.FIELDS.CONFIRM_PASSWORD}}
                 </label>
+
                 <div class="col-8 col-sm-7 d-flex align-items-center _input_style_1">
                   <input formControlName="confirm_password" [type]="hide ? 'password' : 'text'" class="form-control"
                          id="inputPassword">
@@ -133,6 +148,12 @@
                     <mat-icon class="_c_dark_red">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   </button>
                 </div>
+
+                <div class="col-4 col-sm-5"></div>
+                <app-form-error class="col-8 col-sm-7" [validMsg]="_tb.translate.FORMS.MSG.PASSWORD_MATCH"
+                                [control]="passwordFormGroup.get('confirm_password')">
+                </app-form-error>
+
               </div>
 
             </form>
@@ -143,7 +164,8 @@
           <button (click)="isPassword=false" class="button-lg mb-3 _bg_dark_gray _c_white _button_style_1"
                   mat-stroked-button>{{_tb.translate.common.back}}
           </button>
-          <button [disabled]="passwordFormGroup.invalid" (click)="setPassword()" class="button-lg mb-3 _bg_light_red _c_white _button_style_1"
+          <button [disabled]="passwordFormGroup.invalid" (click)="setPassword()"
+                  class="button-lg mb-3 _bg_light_red _c_white _button_style_1"
                   mat-stroked-button>{{_tb.translate.common.next}}
           </button>
         </div>
@@ -152,7 +174,7 @@
 
     </mat-step>
 
-    <!--step 3-->
+    <!--step 4-->
     <mat-step [stepControl]="personalInfoFormGroup">
       <ng-template matStepLabel>{{_tb.translate.pages.login.steps.personal}}</ng-template>
 
@@ -162,55 +184,68 @@
             {{_tb.translate.pages.login.labels.personal_info}}
           </p>
           <!--form section-->
-          <form [ngClass]="_helpService.screenWidth>480?'w-75':''" [formGroup]="personalInfoFormGroup">
+          <form (ngSubmit)="!personalInfoFormGroup.invalid?submitPersonalInfo():personalInfoFormGroup.markAllAsTouched()" [formGroup]="personalInfoFormGroup">
+            <div [ngClass]="_helpService.screenWidth>480?'w-75':''">
 
-            <!--name-->
-            <div class="form-group row d-flex align-items-center">
+            <!--FirstName-->
+            <div class="form-group row d-flex align-items-center py-1">
               <label class="col-4 _text-start _f_bold_body col-form-label text-capitalize">
                 {{_tb.translate.FORMS.FIELDS.NAME}}
               </label>
-              <div class="col-8 d-flex align-items-center _input_style_1">
-                <input formControlName="name" type="text" class="form-control">
+              <div class="col-8 d-flex flex-wrap align-items-center _input_style_1">
+                <input formControlName="firstName" type="text" class="form-control">
+                <app-form-error [control]="personalInfoFormGroup.get('firstName')"></app-form-error>
               </div>
             </div>
 
             <!--LastName-->
-            <div class="form-group row d-flex align-items-center">
+            <div class="form-group row d-flex align-items-center py-1">
               <label class="col-4 _text-start _f_bold_body col-form-label text-capitalize">
                 {{_tb.translate.FORMS.FIELDS.LAST_NAME}}
               </label>
-              <div class="col-8 d-flex align-items-center _input_style_1">
+              <div class="col-8 d-flex flex-wrap align-items-center _input_style_1">
                 <input formControlName="lastName" type="text" class="form-control">
+                <app-form-error [control]="personalInfoFormGroup.get('lastName')"></app-form-error>
               </div>
             </div>
 
-            <!--Email-->
-            <div class="form-group row d-flex align-items-center">
+            <!--workEmail-->
+            <div class="form-group row d-flex align-items-center py-1">
               <label class="col-4 _text-start _f_bold_body col-form-label text-capitalize">
-                {{_tb.translate.FORMS.FIELDS.EMAIL}}
+                {{_tb.translate.FORMS.FIELDS.WORK_EMAIL}}
               </label>
-              <div class="col-8 d-flex align-items-center _input_style_1">
-                <input formControlName="email" type="text" class="form-control">
+              <div class="col-8 d-flex flex-wrap align-items-center _input_style_1">
+                <input formControlName="workEmail" type="text" class="form-control">
+                <app-form-error [control]="personalInfoFormGroup.get('workEmail')"></app-form-error>
               </div>
             </div>
 
             <!--Gender-->
-            <div class="form-group row d-flex align-items-center">
+            <div class="form-group row d-flex align-items-center py-1">
               <label class="col-4 _text-start _f_bold_body col-form-label text-capitalize">
                 {{_tb.translate.FORMS.FIELDS.GENDER}}
               </label>
-              <div class="col-8 d-flex align-items-center _input_style_1">
-                <input formControlName="lastName" type="text" class="form-control">
+              <div class="col-8 d-flex align-items-center">
+                <mat-radio-group  formControlName="gender" class="d-flex justify-content-around w-100 _radio_style_1" aria-label="Select an option">
+                  <mat-radio-button value=1 checked>{{_tb.translate.FORMS.STATIC.GENDER.MALE}}</mat-radio-button>
+                  <mat-radio-button value=2>{{_tb.translate.FORMS.STATIC.GENDER.FEMALE}}</mat-radio-button>
+                </mat-radio-group>
               </div>
             </div>
 
-            <!--birthday-->
-            <div class="form-group row d-flex align-items-center">
+            <!--birth Date-->
+            <div class="form-group row d-flex align-items-center py-1">
               <label class="col-4 _text-start _f_bold_body col-form-label text-capitalize">
                 {{_tb.translate.FORMS.FIELDS.BIRTH_DATE}}
               </label>
-              <div class="col-8 d-flex align-items-center _input_style_1">
-                <input formControlName="birthday" type="text" class="form-control">
+              <div class="col-8 d-flex flex-wrap align-items-center _select_style_2">
+                <mat-form-field color="accent" appearance="fill">
+                  <input [max]="_helpService.getToday()" formControlName="birthDate" matInput [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <app-form-error [control]="personalInfoFormGroup.get('birthDate')"></app-form-error>
               </div>
             </div>
 
@@ -219,76 +254,95 @@
             </p>
 
             <!--CompanyName-->
-            <div class="form-group row d-flex align-items-center">
+            <div class="form-group row d-flex align-items-center py-1">
               <label class="col-4 _text-start _f_bold_body col-form-label text-capitalize">
                 {{_tb.translate.FORMS.FIELDS.COMPANY_NAME}}
               </label>
-              <div class="col-8 d-flex align-items-center _input_style_1">
-                <input formControlName="companyName" type="text" class="form-control">
+              <div class="col-8 d-flex flex-wrap align-items-center _input_style_1">
+                <input formControlName="name" type="text" class="form-control">
+                <app-form-error [control]="personalInfoFormGroup.get('name')"></app-form-error>
               </div>
             </div>
 
             <!--BusinessType-->
-            <div class="form-group row d-flex align-items-center">
+            <div class="form-group row d-flex align-items-center py-1">
               <label class="col-4 _text-start _f_bold_body col-form-label text-capitalize">
                 {{_tb.translate.pages.login.business_type}}
               </label>
-              <div class="col-8 d-flex align-items-center _input_style_1">
-                <input formControlName="businessType" type="text" class="form-control">
+              <div class="col-8 d-flex flex-wrap align-items-center _select_style_2">
+                <div class="d-flex align-items-center w-100">
+                <ng-container *ngIf="(businessTypeList |async) as _list">
+                  <ng-container *ngIf="_list.businessTypes && _list.businessTypes.length>0" >
+                  <mat-select [placeholder]="_tb.translate.pages.login.business_type"
+                              formControlName="businessTypeId"
+                  >
+                    <mat-option *ngFor="let _item of _list.businessTypes" [value]="2">{{_item.name}}</mat-option>
+                  </mat-select>
+                  </ng-container>
+                  <mat-icon>expand_more</mat-icon>
+                </ng-container>
+                </div>
+                <app-form-error [control]="personalInfoFormGroup.get('businessTypeId')"></app-form-error>
               </div>
             </div>
 
             <!--BusinessTel-->
-            <div class="form-group row d-flex align-items-center">
+            <div class="form-group row d-flex align-items-center py-1">
               <label class="col-4 _text-start _f_bold_body col-form-label text-capitalize">
                 {{_tb.translate.pages.login.business_tel}}
               </label>
-              <div class="col-8 d-flex align-items-center _input_style_1">
-                <input formControlName="businessTel" type="text" class="form-control">
+              <div class="col-8 d-flex flex-wrap align-items-center _input_style_1">
+                <input formControlName="phoneNumber" type="text" class="form-control">
+                <app-form-error [control]="personalInfoFormGroup.get('phoneNumber')"></app-form-error>
               </div>
             </div>
 
             <!--BusinessWebsite-->
-            <div class="form-group row d-flex align-items-center">
+            <div class="form-group row d-flex align-items-center py-1">
               <label class="col-4 _text-start _f_bold_body col-form-label text-capitalize">
                 {{_tb.translate.pages.login.business_web}}
               </label>
-              <div class="col-8 d-flex align-items-center _input_style_1">
-                <input formControlName="businessWebsite" type="text" class="form-control">
+              <div class="col-8 d-flex flex-wrap align-items-center _input_style_1">
+                <input formControlName="website" type="text" class="form-control">
+                <app-form-error [validMsg]="_tb.translate.FORMS.MSG.INVALID_URL" [control]="personalInfoFormGroup.get('website')"></app-form-error>
               </div>
             </div>
 
             <!--taxNo-->
-            <div class="form-group row d-flex align-items-center">
+            <div class="form-group row d-flex align-items-center py-1">
               <label class="col-4 _text-start _f_bold_body col-form-label text-capitalize">
                 {{_tb.translate.FORMS.FIELDS.TAX_NO}}
               </label>
-              <div class="col-8 d-flex align-items-center _input_style_1">
-                <input formControlName="taxNo" type="text" class="form-control">
+              <div class="col-8 d-flex flex-wrap align-items-center _input_style_1">
+                <input formControlName="commercialRecord" type="text" class="form-control">
+                <app-form-error [control]="personalInfoFormGroup.get('commercialRecord')"></app-form-error>
               </div>
             </div>
 
             <!--address-->
-            <div class="form-group row d-flex align-items-center">
+            <div class="form-group row d-flex align-items-center py-1">
               <label class="col-4 _text-start _f_bold_body col-form-label text-capitalize">
                 {{_tb.translate.FORMS.FIELDS.ADDRESS}}
               </label>
-              <div class="col-8 d-flex align-items-center _input_style_1">
+              <div class="col-8 d-flex flex-wrap align-items-center _input_style_1">
                 <input formControlName="address" type="text" class="form-control">
+                <app-form-error [control]="personalInfoFormGroup.get('address')"></app-form-error>
               </div>
             </div>
 
-          </form>
-        </div>
+            </div>
 
         <!--next prev buttons-->
         <div class="col-12 pt-5 d-flex justify-content-between align-items-center button-col">
           <button class="button-lg mb-3 _bg_dark_gray _c_white _button_style_1"
                   matStepperPrevious mat-stroked-button>{{_tb.translate.common.back}}
           </button>
-          <button (click)="isFinished = true" class="button-lg mb-3 _bg_light_red _c_white _button_style_1"
+          <button type="submit" class="button-lg mb-3 _bg_light_red _c_white _button_style_1"
                   mat-stroked-button>{{_tb.translate.common.finish}}
           </button>
+        </div>
+
+          </form>
         </div>
 
       </div>
@@ -300,7 +354,7 @@
             <p class="_f_secondary_body _c_dark_gray _padding-lr-100" style="line-height: 40px">{{_tb.translate.pages.login.msg.check_your_email}}</p>
           </div>
           <div class="col-12 pt-5 d-flex justify-content-center button-col">
-            <button class="button-lg mb-3 _bg_light_red _c_white _button_style_1"
+            <button [disabled]="" class="button-lg mb-3 _bg_light_red _c_white _button_style_1"
                     mat-stroked-button>{{_tb.translate.pages.login.my_profile}}
             </button>
           </div>
@@ -313,13 +367,15 @@
     <!-- changed step icons -->
     <ng-template matStepperIcon="number" let-index="index" let-state="state">
       <mat-icon *ngIf="index == 0">phone_android</mat-icon>
-      <mat-icon *ngIf="index == 1">lock_open</mat-icon>
-      <mat-icon *ngIf="index == 2">perm_identity</mat-icon>
+      <mat-icon *ngIf="index == 1">link</mat-icon>
+      <mat-icon *ngIf="index == 2">lock_open</mat-icon>
+      <mat-icon *ngIf="index == 3">perm_identity</mat-icon>
     </ng-template>
     <ng-template matStepperIcon="edit" let-index="index" let-state="state">
       <mat-icon *ngIf="index == 0">phone_android</mat-icon>
-      <mat-icon *ngIf="index == 1">lock_open</mat-icon>
-      <mat-icon *ngIf="index == 2">perm_identity</mat-icon>
+      <mat-icon *ngIf="index == 1">link</mat-icon>
+      <mat-icon *ngIf="index == 2">lock_open</mat-icon>
+      <mat-icon *ngIf="index == 3">perm_identity</mat-icon>
     </ng-template>
   </mat-horizontal-stepper>
 </div>

@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {BehaviorSubject, Observable} from "rxjs";
 import {TranslateBaseService} from "../app-translation/services/translation-base.service";
 import {ToastrService} from "ngx-toastr";
+import {FormControl, FormGroup} from "@angular/forms";
 
 
 @Injectable()
@@ -102,6 +103,34 @@ export class HelpService {
   public ScreenDimensions(){
     this.screenWidth= window.innerWidth;
     this.screenHeight=window.innerHeight;
+  }
+
+  /*get today as date*/
+  getToday(){
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = today.getFullYear();
+
+    return   yyyy + '-' + mm + '-' + dd;
+  }
+
+
+  /*for show all field errors forms */
+  showValidationMsg(formGroup: FormGroup) {
+
+    for (const key in formGroup.controls) {
+      if (formGroup.controls.hasOwnProperty(key)) {
+        const control: FormControl = <FormControl>formGroup.controls[key];
+
+        if (Object.keys(control).includes('controls')) {
+          const formGroupChild: FormGroup = <FormGroup>formGroup.controls[key];
+          this.showValidationMsg(formGroupChild);
+        }
+
+        control.markAsTouched();
+      }
+    }
   }
 
 }

@@ -5,14 +5,18 @@ body{
 
 app-signup-stepper {
 
-  .mat-step-header .mat-step-icon {
-    background-color: $app-white;
-    color: $app-light-red;
-    border: 1px solid;
-  }
-  .mat-step-header .mat-step-icon-selected {
-    background-color: $app-light-red !important;
-    color: $app-white;
+  .mat-step-header {
+    width: 25%;
+    .mat-step-icon {
+      background-color: $app-white;
+      color: $app-light-red;
+      border: 1px solid;
+    }
+    .mat-step-icon-selected {
+      background-color: $app-light-red !important;
+      color: $app-white;
+    }
+    .mat-step-label{text-overflow: clip;white-space: pre-wrap}
   }
 
   mat-horizontal-stepper{

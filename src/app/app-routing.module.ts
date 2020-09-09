@@ -3,21 +3,20 @@ import {NgModule} from "@angular/core";
 import {CanDeactivateGuardService} from "./services/can-deactivate-guard.service";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  {path: 'home',
-    loadChildren:() => import('./pages/home/home.module').then(m=>m.HomeModule),
+  { path: '', redirectTo: 'login', pathMatch: 'full',
   },
   {
     path: 'login',
     loadChildren:() => import('./pages/registration/login/login.module').then(m=>m.LoginModule)
   },
+
   {
     path: 'stepper',
     loadChildren:() => import('./pages/registration/signup-stepper/signup-stepper.module').then(m=>m.LoginModule)
   },
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'login'
   },
 ];
 
