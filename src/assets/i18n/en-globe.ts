@@ -48,7 +48,9 @@ export const EN_GLOBE_DATA = {
     reset_form:'reset form',
     send:'Send',
     views:'views',
-    or:'or'
+    or:'or',
+    change_email:'Change E-mail',
+    send_again:'Send again',
   },
   FORMS: {
     MSG: {
@@ -139,11 +141,12 @@ export const EN_GLOBE_DATA = {
         set_your_password:'set your password',
         personal_info:'personal info',
         Company_info:'Company info',
-        reSend_code:'resend code'
+        reSend_code:'resend code',
       },
       msg:{
         completed_successfully:'completed successfully',
-        check_your_email:'we will review your application soon, enjoy building your profile please check your e-mail to verify it',
+        check_your_email:'Your registration is almost completed! an e-mail has been sent to the e-mail address:',
+        complete_register:'kindly follow the instructions to complete your registration'
       },
       title: 'Welcome to Tourxa',
       login:'login',

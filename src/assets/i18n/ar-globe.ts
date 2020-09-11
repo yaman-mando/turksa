@@ -53,7 +53,9 @@ export const AR_GLOBE_DATA: typeof EN_GLOBE_DATA = {
     reset_form:'إعادة تعيين',
     send:'إرسال',
     views:'مشاهدة',
-    or:'أو'
+    or:'أو',
+    change_email:'تغغير البريد الالكتروني',
+    send_again:'إعادة إرسال',
   },
   FORMS: {
     MSG: {
@@ -150,7 +152,8 @@ export const AR_GLOBE_DATA: typeof EN_GLOBE_DATA = {
       },
       msg:{
         completed_successfully:'تمت العملية بنجاح',
-        check_your_email:'سنراجع طلبك قريبًا ، استمتع ببناء ملفك الشخصي ، يرجى التحقق من بريدك الإلكتروني للتحقق منه'
+        check_your_email:'التسجيل الخاص بك قد اكتمل تقريبا! تم إرسال بريد إلكتروني إلى عنوان البريد الإلكتروني',
+        complete_register:'يرجى اتباع التعليمات لإتمام التسجيل'
       },
      title:'أهلا بكم في موقع توركسا',
       login:'تسجيل الدخول',

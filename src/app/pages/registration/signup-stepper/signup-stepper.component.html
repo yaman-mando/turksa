@@ -178,7 +178,7 @@
     <mat-step [stepControl]="personalInfoFormGroup">
       <ng-template matStepLabel>{{_tb.translate.pages.login.steps.personal}}</ng-template>
 
-      <div *ngIf="!isFinished" class="row code-row step-row justify-content-around">
+      <div *ngIf="isFinished" class="row code-row step-row justify-content-around">
         <div class="col-12 d-flex flex-column">
           <p [ngClass]="_helpService.screenWidth>480?'w-75':''" class="py-4 text-capitalize _f_secondary_body font-weight-bold _c_dark_gray text-center">
             {{_tb.translate.pages.login.labels.personal_info}}
@@ -227,8 +227,8 @@
               </label>
               <div class="col-8 d-flex align-items-center">
                 <mat-radio-group  formControlName="gender" class="d-flex justify-content-around w-100 _radio_style_1" aria-label="Select an option">
-                  <mat-radio-button value=1 checked>{{_tb.translate.FORMS.STATIC.GENDER.MALE}}</mat-radio-button>
-                  <mat-radio-button value=2>{{_tb.translate.FORMS.STATIC.GENDER.FEMALE}}</mat-radio-button>
+                  <mat-radio-button value='Male' checked>{{_tb.translate.FORMS.STATIC.GENDER.MALE}}</mat-radio-button>
+                  <mat-radio-button value='Female'>{{_tb.translate.FORMS.STATIC.GENDER.FEMALE}}</mat-radio-button>
                 </mat-radio-group>
               </div>
             </div>
@@ -347,17 +347,30 @@
 
       </div>
 
-      <div *ngIf="isFinished" class="row code-row step-row justify-content-around">
+      <div *ngIf="!isFinished" class="row code-row step-row justify-content-around">
           <div class="col-12 d-flex flex-column">
-            <img class="py-4" src="/assets/svg/done-all.svg" alt="done" />
-            <p class="py-3 _f_secondary_body font-weight-bold _c_dark_gray">{{_tb.translate.pages.login.msg.completed_successfully}} ...</p>
-            <p class="_f_secondary_body _c_dark_gray _padding-lr-100" style="line-height: 40px">{{_tb.translate.pages.login.msg.check_your_email}}</p>
+            <img class="py-4" src="/assets/icon/svg/icon-done-all.svg" alt="done" />
+            <p class="_f_secondary_body _c_dark_gray _padding-lr-100" style="line-height: 21px">{{_tb.translate.pages.login.msg.check_your_email}}</p>
+            <p class="_c_light_red _font-20 py-4">{{registeredEmail?registeredEmail:'email@example.com'}}</p>
+            <p class="_f_secondary_body _c_dark_gray _padding-lr-100" style="line-height: 21px">{{_tb.translate.pages.login.msg.complete_register}}</p>
+            <a href="#" class="hover-red _f_secondary_body _c_dark_gray font-weight-bold">{{_tb.translate.common.change_email}}</a>
+            <p class="_f_secondary_body _c_dark_gray">{{_tb.translate.common.or}}
+              <a href="#" class="_c_light_red font-weight-bold">{{_tb.translate.common.send_again}}</a>
+            </p>
+
+
           </div>
+
+        <!--<div class="col-12 d-flex flex-column">
+          <img class="py-4" src="/assets/icon/svg/icon-done-all.svg" alt="done" />
+          <p class="py-3 _f_secondary_body font-weight-bold _c_dark_gray">{{_tb.translate.pages.login.msg.completed_successfully}} ...</p>
+          <p class="_f_secondary_body _c_dark_gray _padding-lr-100" style="line-height: 21px">{{_tb.translate.pages.login.msg.check_your_email}}</p>
+        </div>
           <div class="col-12 pt-5 d-flex justify-content-center button-col">
             <button [disabled]="" class="button-lg mb-3 _bg_light_red _c_white _button_style_1"
                     mat-stroked-button>{{_tb.translate.pages.login.my_profile}}
             </button>
-          </div>
+          </div>-->
 
         </div>
 

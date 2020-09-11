@@ -105,7 +105,7 @@ export class HelpService {
     this.screenHeight=window.innerHeight;
   }
 
-  /*get today as date*/
+  /*get today date as YYYY/MM/DD format */
   getToday(){
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
@@ -113,6 +113,11 @@ export class HelpService {
     const yyyy = today.getFullYear();
 
     return   yyyy + '-' + mm + '-' + dd;
+  }
+
+  //change format date as dd/MM/yyyy
+  changeDateFormat(_date){
+    return _date.getDate() + "/" + (_date.getMonth() + 1) + "/" + _date.getFullYear();
   }
 
 

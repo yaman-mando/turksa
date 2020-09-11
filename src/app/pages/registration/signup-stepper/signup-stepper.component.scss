@@ -91,4 +91,8 @@ app-signup-stepper {
     svg{path{fill:#ccc !important; }}
   }
 
+  .hover-red{
+    &:hover{color: $app-light-red !important}
+  }
+
 }

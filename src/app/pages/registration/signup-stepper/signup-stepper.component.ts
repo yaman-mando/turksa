@@ -21,6 +21,7 @@ import {AppStorageService} from "../../../app-factory/services/app-storage.servi
 import {PageImplement} from "../../../app-implements/app-implements";
 import {patternData} from "../../../data/general.data";
 import {DateAdapter} from "@angular/material/core";
+import {Behavior} from "popper.js";
 
 @Component({
   selector: 'app-signup-stepper',
@@ -53,10 +54,13 @@ export class SignupStepperComponent implements OnInit {
   token: string;
   data = new Date();
   businessTypeList:Observable<IBusinessTypesList>;
+  registeredEmail:string;
 
   TimerCount: number = 5;
   minuteTimerCount: number = 1;
   secondTimerCount: number = 1;
+
+  _iconList:Observable<iconStyleList>;
 
 
   constructor(private _formBuilder: FormBuilder,
@@ -80,12 +84,14 @@ export class SignupStepperComponent implements OnInit {
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icon/svg/person.svg'));
     this.matIconRegistry.addSvgIcon('arrow',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icon/svg/arrow-alt-circle.svg'));
-
-    this.ViewWillEnter()
+    this.matIconRegistry.addSvgIcon('done-all',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icon/svg/icon-done-all.svg'));
 
   }
 
   ngOnInit() {
+
+    this.getBusinessType();
 
     this.dateAdapter.setLocale('en-GB');
 
@@ -127,14 +133,11 @@ export class SignupStepperComponent implements OnInit {
       address: [''],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      gender: [1, Validators.required],
+      gender: ['Male', Validators.required],
       birthDate: [''],
     })
   }
 
-  ViewWillEnter(){
-
-  }
 
 
   goStep(_index: number) {
@@ -151,6 +154,13 @@ export class SignupStepperComponent implements OnInit {
       this.TimerCount = 5;
       clearInterval(this.timeFun);
       this.timer();
+    }
+  }
+
+  addNewIcon(_iconList:iconStyleList){
+    for (let i = 0; i <_iconList.iconList.length ; i++) {
+        this.matIconRegistry.addSvgIcon(_iconList.iconList[i].iconName,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/icon/svg/${_iconList.iconList[i].fileName}.svg`));
     }
   }
 
@@ -269,13 +279,15 @@ export class SignupStepperComponent implements OnInit {
     this._signUpService.getBusinessType(true);
   }
 
-
   submitPersonalInfo(){
     const _obj:IPersonalWorkInfo=this.personalInfoFormGroup.getRawValue();
+    //_obj.birthDate = this._helpService.changeDateFormat(_obj.birthDate);
+    _obj.birthDate = '01/01/2014';
 
     this._signUpService.submitPersonalInfo(_obj).then(res=>{
       if(res.status){
         this._uxService.showSnackBar(this._tb.translate.FORMS.MSG.SEND_SUCCESS,false,2500);
+        this.registeredEmail=_obj.workEmail;
         this.isFinished=true;
       }
       else{
@@ -286,14 +298,16 @@ export class SignupStepperComponent implements OnInit {
       }
     });
 
-    console.log(_obj);
   }
 
-  showValidationMsg(formGroup: FormGroup) {
+}
 
+interface iconStyle {
+  iconName:string;
+  fileName:string
+}
 
-  }
-
-
+interface iconStyleList {
+  iconList:iconStyle[]
 }
 
